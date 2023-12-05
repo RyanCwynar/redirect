@@ -5,6 +5,10 @@
     <script type="text/javascript">
         // Function to redirect to Obsidian
         function redirectToObsidian() {
+            const i = window.location.href.indexOf("obsidian://")
+            if(i > -1){
+                window.location.href = window.location.href.slice(i)
+            }
             var url = new URL(window.location.href)
             const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
             const file = pathSegments.slice(-1)[0].split('-').join(" ");  // Get the last segment

@@ -3,26 +3,12 @@
 <head>
     <title>Obsidian Redirect</title>
     <script type="text/javascript">
-        // Function to parse URL parameters
-        function getParameterByName(name, url = window.location.href) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
         // Function to redirect to Obsidian
         function redirectToObsidian() {
-            var vault = getParameterByName('vault');
-            var file = getParameterByName('file');
-            if (vault && file) {
-                var obsidianUrl = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file);
-                window.location.href = obsidianUrl;
-            } else {
-                document.getElementById("message").innerText = "Missing vault or file parameters!";
-            }
+            var url = new URL(window.location.href)
+            var file = url.pathname.slice(1).split('-').join(' ')
+            var obsidianUrl = 'obsidian://open?vault=ADO&file=' + encodeURIComponent(file);
+            window.location.href = obsidianUrl;
         }
     </script>
 </head>
